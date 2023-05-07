@@ -1,11 +1,11 @@
-from typing import Tuple
 from src.__logger import ServiceLogger
 from src.__constants import LOGS_PATH
-import json
-import src.__constants as config
+from typing import Tuple
+
 import logging
-import os
 import datetime
+import json
+import os
 
 
 def read_config(node: str) -> Tuple[dict, dict]:
@@ -14,8 +14,6 @@ def read_config(node: str) -> Tuple[dict, dict]:
         cluster_config = json.loads(cluster_config)
 
     server_config = cluster_config.get("nodes", {}).get(node, {})
-    # pprint(server_config)
-    # pprint(cluster_config)
     return server_config, cluster_config
 
 
@@ -29,6 +27,8 @@ def compose_cluster_state(node: str, cluster_config: dict) -> dict:
             "hrbt-port": cluster_config.get("nodes", {}).get(cluster_node, {}).get("heartbeat-port", None),
             "srvr-port": cluster_config.get("nodes", {}).get(cluster_node, {}).get("server-interaction-port", None),
             "state": {
+                "leader": None,
+                "curr-term": 0,
                 "alive": False,
                 "hrbt-ts": None
             }

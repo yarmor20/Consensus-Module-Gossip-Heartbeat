@@ -2,3 +2,4 @@ grpcio==1.52.0
 grpcio-tools==1.51.3
 protobuf==4.22.1
 python-dotenv==1.0.0
+numpy~=1.24.3

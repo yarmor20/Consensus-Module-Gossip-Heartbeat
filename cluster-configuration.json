@@ -12,6 +12,12 @@
       "heartbeat-port": 50055,
       "server-interaction-port": 50056,
       "client-interaction-port": 50057
+    },
+    "n2": {
+      "host": "localhost",
+      "heartbeat-port": 50058,
+      "server-interaction-port": 50059,
+      "client-interaction-port": 50060
     }
   }
 }
