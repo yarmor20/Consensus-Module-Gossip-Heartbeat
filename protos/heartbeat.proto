@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-message Heartbeat {
-  string message = 1;
-}
-
-service HeartbeatService {
-  rpc HeartbeatRPC (Heartbeat) returns (Heartbeat) {}
-}

@@ -3,21 +3,15 @@
   "nodes": {
     "n0": {
       "host": "localhost",
-      "heartbeat-port": 50051,
-      "server-interaction-port": 50052,
-      "client-interaction-port": 50053
+      "port": 50051
     },
     "n1": {
       "host": "localhost",
-      "heartbeat-port": 50055,
-      "server-interaction-port": 50056,
-      "client-interaction-port": 50057
+      "port": 50055
     },
     "n2": {
       "host": "localhost",
-      "heartbeat-port": 50058,
-      "server-interaction-port": 50059,
-      "client-interaction-port": 50060
+      "port": 50053
     }
   }
 }

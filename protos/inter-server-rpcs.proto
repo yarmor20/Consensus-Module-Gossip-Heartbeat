@@ -1,0 +1,26 @@
+// Module for inter-server communication via RPCs.
+syntax = "proto3";
+
+// Message used for inter-server communication.
+message Heartbeat {
+  string message = 1;
+}
+
+// Message used for inter-server data transmission.
+message PullEntries {
+  string data = 1;
+}
+
+service InterServerRPCHandler {
+  // Used to send heartbeats as a way for inter-server communication.
+  rpc HeartbeatRPC (Heartbeat) returns (Heartbeat) {}
+
+  // Used during leader elections to vote for the leader server.
+  rpc RequestVoteRPC (Heartbeat) returns (Heartbeat) {}
+
+  // Used by syncing servers to pull new log entries from sync sources.
+  rpc PullEntriesRPC (PullEntries) returns (Heartbeat) {}
+
+  // Used by syncing servers to notify the sync sources that the logs were replicated.
+  rpc UpdatePositionRPC (Heartbeat) returns (Heartbeat) {}
+}

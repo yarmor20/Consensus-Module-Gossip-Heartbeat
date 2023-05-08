@@ -1,0 +1,25 @@
+// Module for client-server communication via RPCs.
+syntax = "proto3";
+
+// Message used by client to pass the entries to the server.
+message Entries {
+  string data = 1;
+}
+
+// Message used by server to notify the client if log entries were acknowledged.
+message ServerResponse {
+  string message = 1;
+}
+
+// Message used by client to acknowledge information from server.
+message ClientResponse {
+  string message = 1;
+}
+
+service RPCHandler {
+  // Used by client to pass the entries to the server.
+  rpc PutEntriesRPC (Entries) returns (ServerResponse) {}
+
+  // Used by server to acknowledge to the client that the log entry was committed.
+  rpc AckEntriesRPC (ServerResponse) returns (ClientResponse) {}
+}

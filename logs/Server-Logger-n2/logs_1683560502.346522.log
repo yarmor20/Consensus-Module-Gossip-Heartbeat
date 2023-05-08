@@ -1,0 +1,50 @@
+✅ [INFO] - [2023-05-08 21:41:42] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n0]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:42] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:44] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n0]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:44] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:46] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n0]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:46] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:46] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n0]. Event: [ping].
+✅ [INFO] - [2023-05-08 21:41:48] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n0]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:48] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:49] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [ping].
+✅ [INFO] - [2023-05-08 21:41:50] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n0]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:50] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:51] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:41:52] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:53] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:41:54] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:55] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:41:56] - (server.py).get_peer_acknowledgements(102): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-08 21:41:57] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:41:58] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n0]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:41:59] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:42:00] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n0]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:42:01] - (grpc_server_servicer.py).__get_rpc_message(50): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-08 21:42:02] - (server.py).serve(256): Cluster State: Cluster is up and running. Leader: [None]
+✅ [INFO] - [2023-05-08 21:42:04] - (server.py).start_leader_election(226): Leader Election Closure: Node [n2] elected for term: [1]
+✅ [INFO] - [2023-05-08 21:42:04] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:09] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:14] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:19] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:23] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:24] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:27] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:28] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:29] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:29] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:31] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:31] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:32] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:33] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:34] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:34] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:39] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:44] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:49] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:52] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:53] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:54] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:54] - (server.py).serve(273): Waiting for some action...
+✅ [INFO] - [2023-05-08 21:42:54] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-08 21:42:59] - (server.py).serve(273): Waiting for some action...

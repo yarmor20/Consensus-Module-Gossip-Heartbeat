@@ -23,9 +23,19 @@ STATE_LEADER = "ldr"
 STATE_FOLLOWER = "flwr"
 STATE_CANDIDATE = "cndt"
 
+# ----------------- CLUSTER HEALTH ------------------
+CL_HEALTH_GREEN = "clhgrn"    # All connections are preserved.
+CL_HEALTH_YELLOW = "clhylw"   # Not all connections are preserved but cluster can run.
+CL_HEALTH_RED = "clhred"      # Cluster cannot run.
+
 # ----------------- RPC MESSAGE ------------------
 RPC_MSG_PARAM_STATE = "state"
 RPC_MSG_PARAM_GOSSIP_MAP = "gossip"
+
+# ------------ RANDOM SERVER CHANNEL -------------
+# TODO: Add randomized port and host based on the cluster config.
+RANDOM_SERVER_PORT = 50053
+RANDOM_SERVER_HOST = "localhost"
 
 
 class HeartbeatEvent(Enum):

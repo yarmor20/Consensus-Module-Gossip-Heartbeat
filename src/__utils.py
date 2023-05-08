@@ -24,13 +24,12 @@ def compose_cluster_state(node: str, cluster_config: dict) -> dict:
             continue
 
         cluster_state[cluster_node] = {
-            "hrbt-port": cluster_config.get("nodes", {}).get(cluster_node, {}).get("heartbeat-port", None),
-            "srvr-port": cluster_config.get("nodes", {}).get(cluster_node, {}).get("server-interaction-port", None),
+            "port": cluster_config.get("nodes", {}).get(cluster_node, {}).get("port", None),
             "state": {
                 "leader": None,
                 "curr-term": 0,
                 "alive": False,
-                "hrbt-ts": None
+                "ts": None
             }
         }
     return cluster_state
@@ -66,4 +65,3 @@ def get_logger(name) -> logging.Logger:
     info_logger = ServiceLogger(name, filepath)
     ilogger.addHandler(info_logger)
     return ilogger
-
