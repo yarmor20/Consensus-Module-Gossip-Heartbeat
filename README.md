@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/license/yarmor20/Gossip-Raft-Consensus-Algorithm)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![](https://img.shields.io/github/commit-activity/w/yarmor20/Gossip-Raft-Consensus-Algorithm)
 ![](https://img.shields.io/github/last-commit/yarmor20/Gossip-Raft-Consensus-Algorithm)
 ![](https://img.shields.io/github/languages/code-size/yarmor20/Gossip-Raft-Consensus-Algorithm)
