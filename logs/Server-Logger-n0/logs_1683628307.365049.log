@@ -1,0 +1,80 @@
+✅ [INFO] - [2023-05-09 16:31:47] - (server.py).get_peer_acknowledgements(101): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-09 16:31:49] - (server.py).get_peer_acknowledgements(101): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-09 16:31:49] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [ping].
+✅ [INFO] - [2023-05-09 16:31:51] - (server.py).get_peer_acknowledgements(101): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-09 16:31:51] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:53] - (server.py).get_peer_acknowledgements(101): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-09 16:31:53] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:55] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [ping].
+✅ [INFO] - [2023-05-09 16:31:55] - (server.py).get_peer_acknowledgements(101): Awaiting connection to [n1]. Exception: [AioRpcError]
+✅ [INFO] - [2023-05-09 16:31:55] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:57] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:57] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:59] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:59] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:32:01] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:32:01] - (server.py).serve(340): Cluster State: Cluster is up and running. Leader: [None]
+✅ [INFO] - [2023-05-09 16:32:03] - (server.py).start_leader_election(225): Leader Election Closure: Node [n0] elected for term: [1]
+✅ [INFO] - [2023-05-09 16:32:03] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:05] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:05] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:07] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:07] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:09] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:09] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:11] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:11] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:13] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:13] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:15] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:15] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:17] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:17] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:19] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:19] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:21] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:21] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:23] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:23] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:24] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:25] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:25] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:25] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:25] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:25] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:26] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:27] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:28] - (grpc_client_servicer.py).PutEntriesRPC(59): PutEntries RPC Received. Client: [client]. NumEntries: [1].
+✅ [INFO] - [2023-05-09 16:32:29] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:29] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:29] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:29] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [updpstn].
+✅ [INFO] - [2023-05-09 16:32:31] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:31] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:33] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:33] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:35] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:35] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:37] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:37] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:39] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:39] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:41] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:41] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:43] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:43] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:45] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:45] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:47] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:47] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:49] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:49] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:51] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:51] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:53] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [pullentr].
+✅ [INFO] - [2023-05-09 16:32:53] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n1]. Event: [pullentr].

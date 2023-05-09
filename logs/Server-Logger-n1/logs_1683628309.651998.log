@@ -1,0 +1,37 @@
+✅ [INFO] - [2023-05-09 16:31:55] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [ping].
+✅ [INFO] - [2023-05-09 16:31:57] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n2]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:31:57] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n0]. Event: [ping].
+✅ [INFO] - [2023-05-09 16:31:59] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n0]. Event: [clhlth].
+✅ [INFO] - [2023-05-09 16:32:01] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n0]. Event: [rqstvt].
+✅ [INFO] - [2023-05-09 16:32:01] - (grpc_server_servicer.py).__get_rpc_message(47): Message Received. Sender: [n0]. Event: [ldrestbl].
+✅ [INFO] - [2023-05-09 16:32:01] - (server.py).serve(340): Cluster State: Cluster is up and running. Leader: [n0]
+✅ [INFO] - [2023-05-09 16:32:03] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:05] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:07] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:09] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:11] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:13] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:15] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:17] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:19] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:21] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:23] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:25] - (server.py).pull_entries(278): RullEntries RPC Succeeded: Pulled [2] entries from [n0].
+✅ [INFO] - [2023-05-09 16:32:25] - (server.py).update_position(310): UpdatePosition RPC: Updated: [2] Committed: [2].
+✅ [INFO] - [2023-05-09 16:32:27] - (server.py).pull_entries(278): RullEntries RPC Succeeded: Pulled [3] entries from [n0].
+✅ [INFO] - [2023-05-09 16:32:27] - (server.py).update_position(310): UpdatePosition RPC: Updated: [3] Committed: [3].
+✅ [INFO] - [2023-05-09 16:32:29] - (server.py).pull_entries(278): RullEntries RPC Succeeded: Pulled [2] entries from [n0].
+✅ [INFO] - [2023-05-09 16:32:29] - (server.py).update_position(310): UpdatePosition RPC: Updated: [2] Committed: [2].
+✅ [INFO] - [2023-05-09 16:32:31] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:33] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:35] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:37] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:39] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:41] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:43] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:45] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:47] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:49] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:51] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:53] - (server.py).pull_entries(273): RullEntries RPC: No new entries to pull from [n0].
+✅ [INFO] - [2023-05-09 16:32:55] - (server.py).pull_entries(268): RullEntries RPC Timeout: [n0]. Exception: [AioRpcError]

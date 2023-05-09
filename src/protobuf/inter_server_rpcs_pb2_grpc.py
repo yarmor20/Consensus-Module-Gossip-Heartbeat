@@ -26,8 +26,8 @@ class InterServerRPCHandlerStub(object):
                 )
         self.PullEntriesRPC = channel.unary_unary(
                 '/InterServerRPCHandler/PullEntriesRPC',
-                request_serializer=inter__server__rpcs__pb2.PullEntries.SerializeToString,
-                response_deserializer=inter__server__rpcs__pb2.Heartbeat.FromString,
+                request_serializer=inter__server__rpcs__pb2.Heartbeat.SerializeToString,
+                response_deserializer=inter__server__rpcs__pb2.PullEntries.FromString,
                 )
         self.UpdatePositionRPC = channel.unary_unary(
                 '/InterServerRPCHandler/UpdatePositionRPC',
@@ -82,8 +82,8 @@ def add_InterServerRPCHandlerServicer_to_server(servicer, server):
             ),
             'PullEntriesRPC': grpc.unary_unary_rpc_method_handler(
                     servicer.PullEntriesRPC,
-                    request_deserializer=inter__server__rpcs__pb2.PullEntries.FromString,
-                    response_serializer=inter__server__rpcs__pb2.Heartbeat.SerializeToString,
+                    request_deserializer=inter__server__rpcs__pb2.Heartbeat.FromString,
+                    response_serializer=inter__server__rpcs__pb2.PullEntries.SerializeToString,
             ),
             'UpdatePositionRPC': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdatePositionRPC,
@@ -146,8 +146,8 @@ class InterServerRPCHandler(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/InterServerRPCHandler/PullEntriesRPC',
-            inter__server__rpcs__pb2.PullEntries.SerializeToString,
-            inter__server__rpcs__pb2.Heartbeat.FromString,
+            inter__server__rpcs__pb2.Heartbeat.SerializeToString,
+            inter__server__rpcs__pb2.PullEntries.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

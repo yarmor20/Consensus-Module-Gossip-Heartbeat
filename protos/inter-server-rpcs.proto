@@ -19,7 +19,7 @@ service InterServerRPCHandler {
   rpc RequestVoteRPC (Heartbeat) returns (Heartbeat) {}
 
   // Used by syncing servers to pull new log entries from sync sources.
-  rpc PullEntriesRPC (PullEntries) returns (Heartbeat) {}
+  rpc PullEntriesRPC (Heartbeat) returns (PullEntries) {}
 
   // Used by syncing servers to notify the sync sources that the logs were replicated.
   rpc UpdatePositionRPC (Heartbeat) returns (Heartbeat) {}

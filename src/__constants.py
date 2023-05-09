@@ -6,6 +6,7 @@ import os
 dotenv.load_dotenv("cluster-server.env")
 
 # -------------- NODE CONFIGURATION --------------
+CONFIGURATION_PATH = "cluster-configuration.json"
 NODE = os.getenv("NODE")  # Node name (ID) in the cluster.
 CLUSTER_HOST = os.getenv("HOST")
 
@@ -16,6 +17,8 @@ LOGS_PATH = "logs/"
 HEARTBEAT_TIMEOUT = 2.0
 ELECTION_TIMEOUT = 15.0
 REQUEST_VOTE_TIMEOUT = 4.0
+PULL_ENTRIES_TIMEOUT = 3.0
+UPDATE_POSITION_TIMEOUT = 6.0
 CANDIDATE_ELECTION_TIMEOUT = 7.0
 
 # ----------------- NODE STATES ------------------
@@ -31,10 +34,11 @@ CL_HEALTH_RED = "clhred"      # Cluster cannot run.
 # ----------------- RPC MESSAGE ------------------
 RPC_MSG_PARAM_STATE = "state"
 RPC_MSG_PARAM_GOSSIP_MAP = "gossip"
+RPC_MSG_ENTRY_UUIDS = "entry-uuids"
 
 # ------------ RANDOM SERVER CHANNEL -------------
 # TODO: Add randomized port and host based on the cluster config.
-RANDOM_SERVER_PORT = 50053
+RANDOM_SERVER_PORT = 50051
 RANDOM_SERVER_HOST = "localhost"
 
 
@@ -49,3 +53,5 @@ class HeartbeatEvent(Enum):
     HEARTBEAT_GOSSIP = "gsp"
     REQUEST_VOTE = "rqstvt"
     LEADER_ESTABLISHMENT = "ldrestbl"
+    PULL_ENTRIES = "pullentr"
+    UPDATE_POSITION = "updpstn"

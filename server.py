@@ -7,7 +7,6 @@ from src.__constants import *
 import src.__utils as utils
 
 from concurrent import futures
-import numpy as np
 import asyncio
 import random
 import grpc
@@ -77,7 +76,7 @@ class Server:
                 stub = stubs.get(peer, None)
 
                 # Compose a heartbeat request that consists of cluster state and proper heartbeat event.
-                msg = utils.compose_heartbeat_message(
+                msg = utils.compose_message(
                     event=str(event.value),
                     node=self.node,
                     data={
@@ -91,7 +90,7 @@ class Server:
                 try:
                     # Send a heartbeat request asynchronously and wait for response as a background task.
                     response = await asyncio.wait_for(task, timeout=HEARTBEAT_TIMEOUT)
-                    response_event, response_node, response_data = utils.decompose_heartbeat_message(response.message)
+                    response_event, response_node, response_data = utils.decompose_message(response.message)
 
                     # Check if the peer server acknowledged a heartbeat.
                     if response_event == HeartbeatEvent.HEARTBEAT_ACK.value:
@@ -170,7 +169,7 @@ class Server:
             stub = self.connect(peer)
 
             # Compose an RPC that consists of cluster state and proper heartbeat event.
-            msg = utils.compose_heartbeat_message(
+            msg = utils.compose_message(
                 event=str(HeartbeatEvent.REQUEST_VOTE.value),
                 node=self.node,
                 data={
@@ -184,7 +183,7 @@ class Server:
             try:
                 # Send a heartbeat request asynchronously and wait for response as a background task.
                 response = await asyncio.wait_for(task, timeout=REQUEST_VOTE_TIMEOUT)
-                response_event, response_node, response_data = utils.decompose_heartbeat_message(response.message)
+                response_event, response_node, response_data = utils.decompose_message(response.message)
 
                 # Check if the peer server acknowledged a heartbeat.
                 if response_event:
@@ -202,7 +201,7 @@ class Server:
         )
 
         # If the majority votes is received, following formula c >= floor(n/2) + 1
-        if votes_count >= np.floor(self.__state.cluster_config.get("num_nodes") / 2) + 1:
+        if votes_count >= utils.get_majority_threshold(num_nodes=self.__state.cluster_config.get("num_nodes")):
             # Acknowledge yourself as a leader.
             self.__state.leader = self.node
 
@@ -238,7 +237,113 @@ class Server:
             self.__state.state = STATE_FOLLOWER
             return False
 
+    async def pull_entries(self) -> bool:
+        """
+        Pull new log entries from sync source by sending PullEntries RPC.
+        Once the entries are replicated to the local log, send the UpdatePosition RPC to the sync source.
+
+        :return: (bool) - True if managed to pull new entries and notify sync source of update position.
+        """
+        # TODO: Add sync source selection.
+        # Pull entries from the sync source.
+        leader = self.__state.leader
+        if not leader:
+            return False
+
+        # Get the peer stub to send an RPC.
+        stub = self.connect(leader)
+
+        # Compose an RPC that consists of cluster state and proper heartbeat event.
+        msg = utils.compose_message(
+            event=str(HeartbeatEvent.PULL_ENTRIES.value),
+            node=self.node,
+            data={
+                RPC_MSG_PARAM_STATE: self.__state.to_dict(),
+                RPC_MSG_PARAM_GOSSIP_MAP: self.interserver_servicer.gossip_map
+            }
+        )
+        heartbeat_request = inter_server_rpcs_pb2.Heartbeat(message=msg)
+        task = stub.PullEntriesRPC(heartbeat_request)
+
+        try:
+            # Send a heartbeat request asynchronously and wait for response as a background task.
+            response = await asyncio.wait_for(task, timeout=PULL_ENTRIES_TIMEOUT)
+            response_event, response_node, response_data = utils.decompose_message(response.data)
+        except (asyncio.TimeoutError, grpc.aio.AioRpcError, ConnectionError) as e:
+            # Could not receive the vote from the peer server.
+            self.__state.logger.info(f"RullEntries RPC Timeout: [{leader}]. Exception: [{type(e).__name__}]")
+            return False
+
+        # If did not manage to pull log entries.
+        if not (response_data and isinstance(response_data, list)):
+            self.__state.logger.info(f"RullEntries RPC: No new entries to pull from [{leader}].")
+            return False
+
+        # Replicate entries to the local server's log.
+        entry_uuids = self.__log.put_entries(data=response_data)
+        self.__state.logger.info(
+            f"RullEntries RPC Succeeded: Pulled [{len(response_data)}] entries from [{leader}]."
+        )
+
+        # Send the UpdatePosition RPC to the sync source to acknowledge log entries replication.
+        response = await self.update_position(sync_source=leader, entry_uuids=entry_uuids)
+        return response
+
+    async def update_position(self, sync_source: str, entry_uuids: list) -> bool:
+        """
+        Send UpdatePosition RPC to nofity the sync source that the pulled log entries
+        were successfully replicated to the server's local log.
+
+        :param sync_source: (str) - Sync source name.
+        :param entry_uuids: (List[str]) - List of replicated entries' UUIDs.
+        :return: True if managed to update position.
+        """
+        # Get the peer stub to send an RPC.
+        stub = self.connect(sync_source)
+
+        # Compose an RPC that consists of cluster state and proper heartbeat event.
+        msg = utils.compose_message(
+            event=str(HeartbeatEvent.UPDATE_POSITION.value),
+            node=self.node,
+            data={
+                RPC_MSG_PARAM_STATE: self.__state.to_dict(),
+                RPC_MSG_PARAM_GOSSIP_MAP: self.interserver_servicer.gossip_map,
+                RPC_MSG_ENTRY_UUIDS: entry_uuids
+            }
+        )
+        heartbeat_request = inter_server_rpcs_pb2.Heartbeat(message=msg)
+        task = stub.UpdatePositionRPC(heartbeat_request)
+
+        try:
+            # Send a heartbeat request asynchronously and wait for response as a background task.
+            response = await asyncio.wait_for(task, timeout=UPDATE_POSITION_TIMEOUT)
+            response_event, response_node, response_data = utils.decompose_message(response.message)
+
+            if response_event == HeartbeatEvent.HEARTBEAT_ACK.value:
+                # Log the number of pulled and committed entries.
+                updated_count, committed_count = response_data.get("updated", 0), response_data.get("committed", 0)
+                self.__state.logger.info(
+                    f"UpdatePosition RPC: Updated: [{updated_count}] Committed: [{committed_count}]."
+                )
+                return True
+            else:
+                self.__state.logger.info(
+                    f"UpdatePosition RPC: Node [{response_node}] received no entries to update position."
+                )
+                return False
+
+        except (asyncio.TimeoutError, grpc.aio.AioRpcError, ConnectionError) as e:
+            # Could not receive the vote from the peer server.
+            self.__state.logger.info(f"UpdatePosition RPC Timeout: [{sync_source}]. Exception: [{type(e).__name__}]")
+            return False
+
     async def serve(self):
+        """
+        The main body of the server. Start the server, ensure it is connected to all
+        other nodes of cluster. Start leader election to pick up a leader for the term.
+        After, start the normal operation, e.g. pulling entries from the sync source and
+        responding to other servers' RPCs.
+        """
         host = self.__state.server_config.get("host", "")
         port = self.__state.server_config.get("port", None)
 
@@ -267,11 +372,16 @@ class Server:
             # During that time a new leader can be chosen.
             time.sleep(random.randint(CANDIDATE_ELECTION_TIMEOUT, 2 * CANDIDATE_ELECTION_TIMEOUT))
 
+        # Start the normal operation.
         try:
 
             while True:
-                self.__state.logger.info("Waiting for some action...")
-                await asyncio.sleep(5.0)
+                # Sleep some time before moking next requests.
+                await asyncio.sleep(HEARTBEAT_TIMEOUT)
+
+                # Pull entries from the sync sources. Leader does not have to do that.
+                if self.node != self.__state.leader:
+                    await self.pull_entries()
 
         except KeyboardInterrupt:
             await self.server.stop(0)

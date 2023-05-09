@@ -1,7 +1,7 @@
 from src.__constants import *
 import src.__utils as utils
 
-from typing import Optional
+from typing import Optional, Dict
 import logging
 
 
@@ -28,6 +28,9 @@ class ServerState:
         # Index of the last entry in the log and last committed entry.
         self.last_log_index: int = -1
         self.last_log_commited: int = -1
+
+        # Map of the enties acknowledgments from other servers to commit.
+        self.commit_map: Dict[str, set] = dict()
 
         # Server event logger. All the logs are preserved in the log file.
         self.logger: logging = utils.get_logger(name=f"Server-Logger-{self.node}")

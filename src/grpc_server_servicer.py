@@ -24,7 +24,7 @@ class InterServerRPCHandler(inter_server_rpcs_pb2_grpc.InterServerRPCHandlerServ
         self.__log: ServerLog = log
 
         # Map of the last updated state from each cluster node.
-        self.gossip_map: dict = utils.compose_cluster_state(node=self.node, cluster_config=self.__state.cluster_config)
+        self.gossip_map: dict = utils.compose_gossip_map(node=self.node, cluster_config=self.__state.cluster_config)
 
     def __get_rpc_message(self, request) -> Union[inter_server_rpcs_pb2.Heartbeat, tuple]:
         """
@@ -37,34 +37,60 @@ class InterServerRPCHandler(inter_server_rpcs_pb2_grpc.InterServerRPCHandlerServ
         # Do not acknowledge the RPC if it is empty.
         if not request.message:
             response_event = HeartbeatEvent.HEARTBEAT_NACK.value
-            response_message = utils.compose_heartbeat_message(event=str(response_event), node=self.node, data={})
+            response_message = utils.compose_message(event=str(response_event), node=self.node, data={})
             response = inter_server_rpcs_pb2.Heartbeat(message=response_message)
             return response
-
-        # Preserve the heartbeat timestamp.
-        heartbeat_timestamp = datetime.datetime.now().timestamp()
 
         # Extract the RPC contents.
         message_json = json.loads(request.message)
         event, sender, data = message_json.get("event"), message_json.get("node"), message_json.get("data")
         self.__state.logger.info(f"Message Received. Sender: [{sender}]. Event: [{event}].")
 
-        # Preserve the update information of the sender node in a gossip map.
-        self.gossip_map[sender]["state"]["alive"] = True
-        self.gossip_map[sender]["state"]["ts"] = heartbeat_timestamp
+        # Preserve the sender's view of the cluster state in a gossip map.
+        self.__update_gossip_map(
+            sender=sender,
+            sender_state=data.get(RPC_MSG_PARAM_STATE, {}),
+            sender_gossip_map=data.get(RPC_MSG_PARAM_GOSSIP_MAP, {})
+        )
 
         return event, sender, data
 
-    def __update_gossip_map(self):
-        pass
+    def __update_gossip_map(self, sender: str, sender_state: dict, sender_gossip_map: dict) -> None:
+        """
+        Update the current state of the cluster nodes (gossip map) in case the received information from
+        the sender node is newer than the local one. Update the sender's state in gossip map.
+
+        :param sender: (str) - Name of the RPC sender node.
+        :param sender_state: (dict) - State of the RPC sender node.
+        :param sender_gossip_map: (dict) - Gossip map of the RPC sender node.
+        :return: None
+        """
+        # Preserve the heartbeat timestamp.
+        heartbeat_timestamp = datetime.datetime.now().timestamp()
+
+        # Update sender's state in gossip map.
+        self.gossip_map[sender]["state"] = sender_state
+        self.gossip_map[sender]["state"]["ts"] = heartbeat_timestamp
+
+        # Go through all the peer nodes.
+        for peer in sender_gossip_map.keys():
+            # Skip yourself.
+            if peer == self.node:
+                continue
+
+            # Get and compare the gossip timestamps.
+            peer_ts = sender_gossip_map.get(peer, {}).get("state", {}).get("ts")
+            # If the timestamps are newer, update gossip map.
+            if peer_ts > self.gossip_map.get(peer, {}).get("state", {}).get("ts"):
+                self.gossip_map[peer]["state"] = sender_gossip_map.get(peer, {}).get("state", {})
 
     def HeartbeatRPC(self, request, context) -> inter_server_rpcs_pb2.Heartbeat:
         """
-        Handler of the incoming to the Heartbeat Servicer remote procedure calls.
+        Handler of the incomming Heartbeat RPC.
 
-        :param request: RPC request sent to the Heartbeat Servicer.
+        :param request: Heartbeat RPC request sent to the Inter-Server Servicer.
         :param context: Context of the received RPC.
-        :return: Response RPC.
+        :return: Response Heartbeat.
         """
         # Do not acknowledge the RPC if it is empty.
         rpc_response = self.__get_rpc_message(request=request)
@@ -92,17 +118,17 @@ class InterServerRPCHandler(inter_server_rpcs_pb2_grpc.InterServerRPCHandlerServ
             response_event = HeartbeatEvent.HEARTBEAT_NACK.value
 
         # Compose and send a response with a respective response event.
-        response_message = utils.compose_heartbeat_message(event=str(response_event), node=self.node, data={})
+        response_message = utils.compose_message(event=str(response_event), node=self.node, data={})
         response = inter_server_rpcs_pb2.Heartbeat(message=response_message)
         return response
 
     def RequestVoteRPC(self, request, context) -> inter_server_rpcs_pb2.Heartbeat:
         """
-        Handler of the incoming to the Heartbeat Servicer remote procedure calls.
+        Handler of the incomming RequestVote RPC.
 
-        :param request: RPC request sent to the Heartbeat Servicer.
+        :param request: RequestVote RPC request sent to the Inter-Server Servicer.
         :param context: Context of the received RPC.
-        :return: Response RPC.
+        :return: Response Heartbeat.
         """
         # Do not acknowledge the RPC if it is empty.
         rpc_response = self.__get_rpc_message(request=request)
@@ -119,7 +145,7 @@ class InterServerRPCHandler(inter_server_rpcs_pb2_grpc.InterServerRPCHandlerServ
             response_event = HeartbeatEvent.HEARTBEAT_NACK.value
 
         # Compose and send a response with a respective response event.
-        response_message = utils.compose_heartbeat_message(event=str(response_event), node=self.node, data={})
+        response_message = utils.compose_message(event=str(response_event), node=self.node, data={})
         response = inter_server_rpcs_pb2.Heartbeat(message=response_message)
         return response
 
@@ -144,3 +170,88 @@ class InterServerRPCHandler(inter_server_rpcs_pb2_grpc.InterServerRPCHandlerServ
         else:
             response_event = HeartbeatEvent.HEARTBEAT_NACK.value
         return response_event
+    
+    def PullEntriesRPC(self, request, context):
+        """
+        Handler of the incomming PullEntries RPC.
+
+        :param request: Heartbeat RPC request sent to the Inter-Server Servicer.
+        :param context: Context of the received RPC.
+        :return: Response PullEntries RPC.
+        """
+        # Do not acknowledge the RPC if it is empty.
+        rpc_response = self.__get_rpc_message(request=request)
+        if isinstance(rpc_response, inter_server_rpcs_pb2.Heartbeat):
+            return rpc_response
+
+        # Extract the RPC contents if succeeded to get the message contents.
+        event, sender, data = rpc_response
+
+        # Get the last log index of the syncing server.
+        sender_last_log_index = data.get(RPC_MSG_PARAM_STATE).get("l-log-idx")
+        if sender_last_log_index:
+            # Get the new entries from sync source.
+            entries = self.__log.get_entries(s_idx=sender_last_log_index)
+            response_event = HeartbeatEvent.HEARTBEAT_NACK.value if not entries else HeartbeatEvent.HEARTBEAT_ACK.value
+        else:
+            entries, response_event = [], HeartbeatEvent.HEARTBEAT_NACK.value
+
+        # Compose and send a response with a respective response event.
+        response_data = utils.compose_message(event=str(response_event), node=self.node, data=entries)
+        response = inter_server_rpcs_pb2.PullEntries(data=response_data)
+        return response
+
+    def UpdatePositionRPC(self, request, context):
+        """
+        Handler of the incomming UpdatePosition RPC.
+
+        :param request: UpdatePosition RPC request sent to the Inter-Server Servicer.
+        :param context: Context of the received RPC.
+        :return: Response Heartbeat RPC.
+        """
+        # Do not acknowledge the RPC if it is empty.
+        rpc_response = self.__get_rpc_message(request=request)
+        if isinstance(rpc_response, inter_server_rpcs_pb2.Heartbeat):
+            return rpc_response
+
+        # Extract the RPC contents if succeeded to get the message contents.
+        event, sender, data = rpc_response
+
+        # Count the number of committed entries during the RPC call.
+        entries_committed_count = entries_updated_count = 0
+
+        # Get log entry uuids.
+        replicated_entry_uuids = data.get(RPC_MSG_ENTRY_UUIDS, [])
+        if not replicated_entry_uuids:
+            response_event = HeartbeatEvent.HEARTBEAT_NACK.value
+        else:
+            # Iterate through all acknowledged log entry UUIDs and update their respective position in commit map.
+            for entry_uuid in replicated_entry_uuids:
+                try:
+                    # Add an RPC sender node to the set of nodes that acknowledges specific entry.
+                    self.__state.commit_map[entry_uuid].add(sender)
+
+                    # Check if the majority of servers have replicated and acknowledged a log entry.
+                    log_entry_ack_count = len(self.__state.commit_map.get(entry_uuid, set()))
+                    num_active_nodes = self.__state.cluster_config.get("num_nodes")
+                    if log_entry_ack_count >= utils.get_majority_threshold(num_nodes=num_active_nodes):
+                        # TODO: Add a mechanism to commit log entries.
+                        # Commit that particular entry.
+                        entries_committed_count += 1
+
+                    # Keep track of updated log entries count.
+                    entries_updated_count += 1
+                except KeyError:
+                    continue
+            response_event = HeartbeatEvent.HEARTBEAT_ACK.value
+
+        # Compose and send a response with a respective response event.
+        response_data = utils.compose_message(
+            event=str(response_event),
+            node=self.node, data={
+                "updated": entries_updated_count,
+                "committed": entries_committed_count
+            }
+        )
+        response = inter_server_rpcs_pb2.PullEntries(data=response_data)
+        return response
