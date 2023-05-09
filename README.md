@@ -23,7 +23,7 @@ We implemented several RPCs to provide an easy and consistent way to inter-serve
 - `HeartbeatRPC`: Used to exchange gossip heartbeats between any couple of servers.
 - `RequestVoteRPC`: Used by a candidate server during the leader election process to ask other servers to vote for it to get elected in the new term.
 - `PullEntriesRPC`: Used by *syncing servers* to pull new log entries from their *sync sources*.
-- `UpdatePositionRPC`: Used by *syncing servers* notify their *sync sources* that the pulled log entries have been replicated the their local log.
+- `UpdatePositionRPC`: Used by *syncing servers* notify their *sync sources* that the pulled log entries have been replicated in their local log.
 - `PutEntriesRPC`: Used by client server to pass new data entries to the leader server.
 - `AckEntriesRPC`: Used by leader to notify the client that the data entries were safely committed.
 
@@ -36,11 +36,15 @@ Once the servers start running, they:
 4. Client sends a request with data entries to any of the cluster servers. These requests are returned by follower servers to the leader.
 5. Leader logs new log entries to its local log.
 6. Followers continuously send PullEntries RPC to their sync source (leader) to pull new entries and log them in their local log.
-7. After the log entries are replicated by the follower to its local log, the follower issues UpdatePosition RPC to notify its sync source that entries were replicated.
+7. After the log entries are replicated by the syncing server to its local log, the follower issues UpdatePosition RPC to notify its sync source that entries were replicated.
 8. Once the log entries are replicated to the majority of servers, the log entry is committed by the leader.
 9. Finally, the leader notifies the client that an entry is committed via AckEntries RPC.
 
 > With each RPC call, each server sends a *gossip map* that contains the current server's information about the cluster's current state. Our gossiping approach uses this information to preserve a consistent cluster state.
+
+## Logs
+
+Each running server produces its event logs. Those logs are persisted on the disk and are saved in the `logs` directory. Look into the logs to understand how the cluster is operating better.
 
 ## Installation
 1. Clone the repository.
