@@ -7,7 +7,7 @@
 
 Demo: [Link](https://drive.google.com/file/d/1Mop_H-z2n28wp8ClL2Cv39zV3VKck4Za/view?usp=sharing).
 
-This repository introduces a basic implementation of the Raft Consensus Algorithm that uses Gossip Heartbeat to solve the problems occurring with leader elections in the base version of Raft. The implementation uses a pull-based approach presented by MongoDB, modifying it for the requirements and benefits that Gossip Heartbeat introduces. More information about the whole approach can be found in the [thesis](https://github.com/yarmor20/Gossip-Raft-Consensus-Algorithm/files/11486270/Gossip-Raft-Consensus-Algorithm-Morozevych.pdf) *"Gossip Raft Consensus Algorithm"*.
+This repository introduces a basic implementation of the Raft Consensus Algorithm that uses Gossip Heartbeat to solve the problems occurring with leader elections in the base version of Raft. The implementation uses a pull-based approach presented by MongoDB, modifying it for the requirements and benefits that Gossip Heartbeat introduces. More information about the whole approach can be found in the thesis *"Gossip Raft Consensus Algorithm"*.
 
 The implementation is based on Python **gRPC**, an open-source high-performance remote procedure call (RPC) framework developed by Google, which allows to write distributed applications by defining remote procedure calls (RPCs) in a structured way.
 
